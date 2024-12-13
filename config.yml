@@ -1,0 +1,36 @@
+
+cation: $HOME/gaianet/config.yaml
+
+moe_synthetic_agent:
+  router:
+    default_expert: text_expert
+    task_mapping:
+      sql: code_expert
+      python: code_expert
+      vision: vision_expert
+      audio: audio_expert
+      text: text_expert
+  
+  experts:
+    code_expert:
+      model: codellama/CodeLlama-7b-hf
+      max_length: 200
+      temperature: 0.7
+    
+    vision_expert:
+      model: openai/clip-vit-large-patch14
+      image_size: 224
+      
+    audio_expert:
+      model: openai/whisper-small
+      sample_rate: 16000
+      
+    text_expert:
+      model: meta-llama/Llama-2-7b-hf
+      max_length: 200
+      temperature: 0.7
+
+  privacy:
+    differential_privacy: true
+    epsilon: 1.0
+    delta: 1e-5
